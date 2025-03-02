@@ -12,11 +12,19 @@ public class CharacterController : MonoBehaviour
     public Animator animator;
     public SpriteRenderer sprite;
 
+    bool canJump;
+    bool canAttack;
+
     public Rigidbody2D rb;
+
+    Vector2 directionToOtherPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        canJump = true;
+        canAttack = false;
     }
 
     // Update is called once per frame
@@ -31,6 +39,11 @@ public class CharacterController : MonoBehaviour
         if(PlayerNumber == 2)
         {
             P2Movement();
+        }
+
+        if (rb.velocity.y == 0)
+        {
+            canJump = true;
         }
     }
 
@@ -61,12 +74,13 @@ public class CharacterController : MonoBehaviour
 			animator.SetBool("isWalking", false);
 		}
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && canJump)
         {
             rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
+            canJump = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) && canAttack)
         {
             animator.SetTrigger("kicked");
         }
@@ -98,14 +112,54 @@ public class CharacterController : MonoBehaviour
 			animator.SetBool("isWalking", false);
 		}
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
         {
             rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
+
+            canJump = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) && canAttack)
         {
             animator.SetTrigger("kicked");
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player")){
+            canAttack = true;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            directionToOtherPlayer = transform.position - other.transform.position;
+
+            if (PlayerNumber == 1 && Input.GetKey(KeyCode.S))
+            {
+                if (directionToOtherPlayer.x <= 0) // checks if they're to the left
+                {
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(attackForce, 0), ForceMode2D.Impulse);
+                }
+                else { other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-attackForce, 0), ForceMode2D.Impulse); } // checks if they're to the right
+            }
+
+            if (PlayerNumber == 2 && Input.GetKey(KeyCode.DownArrow))
+            {
+                if (directionToOtherPlayer.x <= 0) // checks if they're to the left
+                {
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(attackForce, 0), ForceMode2D.Impulse);
+                }
+                else { other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-attackForce, 0), ForceMode2D.Impulse); } // checks if they're to the right
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player")){
+            canAttack = false; }
     }
 }
