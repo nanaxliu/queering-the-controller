@@ -2525,6 +2525,7 @@ GameObject:
   - component: {fileID: 1380248444}
   - component: {fileID: 1380248443}
   - component: {fileID: 1380248447}
+  - component: {fileID: 1380248448}
   m_Layer: 0
   m_Name: player1 (WASD)
   m_TagString: Untagged
@@ -2657,6 +2658,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1380248448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380248442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3958db7c676134aafa7b7978572671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerNumber: 1
+  speed: 0
+  jumpSpeed: 0
+  attackForce: 0
+  rb: {fileID: 1380248443}
 --- !u!1001 &1441135698
 PrefabInstance:
   m_ObjectHideFlags: 0
