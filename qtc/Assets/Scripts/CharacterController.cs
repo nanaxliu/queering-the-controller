@@ -12,11 +12,14 @@ public class CharacterController : MonoBehaviour
     public Animator animator;
     public SpriteRenderer sprite;
 
+    bool canJump;
+
     public Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        canJump = true;
     }
 
     // Update is called once per frame
@@ -31,6 +34,11 @@ public class CharacterController : MonoBehaviour
         if(PlayerNumber == 2)
         {
             P2Movement();
+        }
+
+        if (rb.velocity.y == 0)
+        {
+            canJump = true;
         }
     }
 
@@ -61,9 +69,10 @@ public class CharacterController : MonoBehaviour
 			animator.SetBool("isWalking", false);
 		}
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && canJump)
         {
             rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
+            canJump = false;
         }
 
         if (Input.GetKeyDown(KeyCode.S))
@@ -98,9 +107,11 @@ public class CharacterController : MonoBehaviour
 			animator.SetBool("isWalking", false);
 		}
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) && canJump)
         {
             rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
+
+            canJump = false;
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
