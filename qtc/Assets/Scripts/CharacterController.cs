@@ -60,8 +60,9 @@ public class CharacterController : MonoBehaviour
             canJump = true;
         }
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
+            Debug.Log("sound detected");
             shuffleP1Inputs();
             shuffleP2Inputs();
         }
@@ -72,7 +73,7 @@ public class CharacterController : MonoBehaviour
     void P1Movement()
     {
 
-        if (Input.GetKey(p1Button2))
+        if (Input.GetKeyDown(p1Button2))
         {
             animator.SetBool("isWalking", true);
             sprite.flipX = true;
@@ -84,7 +85,7 @@ public class CharacterController : MonoBehaviour
 			animator.SetBool("isWalking", false);
 		}
 
-        if (Input.GetKey(p1Button4))
+        if (Input.GetKeyDown(p1Button4))
         {
             animator.SetBool("isWalking", true);
             sprite.flipX = false;
