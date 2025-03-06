@@ -2830,6 +2830,14 @@ MonoBehaviour:
   attackForce: 5
   animator: {fileID: 1380248447}
   sprite: {fileID: 1380248445}
+  p1Button1: 119
+  p1Button2: 97
+  p1Button3: 115
+  p1Button4: 100
+  p2Button1: 276
+  p2Button2: 275
+  p2Button3: 273
+  p2Button4: 274
   rb: {fileID: 0}
 --- !u!58 &1380248449
 CircleCollider2D:
@@ -3368,7 +3376,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725403121}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a3958db7c676134aafa7b7978572671, type: 3}
   m_Name: 
@@ -3379,6 +3387,14 @@ MonoBehaviour:
   attackForce: 5
   animator: {fileID: 1380248447}
   sprite: {fileID: 1380248445}
+  p1Button1: 119
+  p1Button2: 97
+  p1Button3: 115
+  p1Button4: 100
+  p2Button1: 276
+  p2Button2: 275
+  p2Button3: 273
+  p2Button4: 274
   rb: {fileID: 0}
 --- !u!58 &1725403127
 CircleCollider2D:
