@@ -7,6 +7,8 @@ public class CharacterController : MonoBehaviour
 {
     public int PlayerNumber;
 
+    public GameManager gameManager;
+
     public float speed;
     public float jumpSpeed;
     public float attackForce;
@@ -27,18 +29,19 @@ public class CharacterController : MonoBehaviour
     public KeyCode p2Button4 = p2inputs.ElementAt(3);
 
     bool canJump;
-    bool canAttack;
 
     public Rigidbody2D rb;
 
     Vector2 directionToOtherPlayer;
+
+    public Camera playerCamera;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         canJump = true;
-        canAttack = false;
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -60,11 +63,19 @@ public class CharacterController : MonoBehaviour
             canJump = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && gameManager.silentMode)
         {
             Debug.Log("sound detected");
+
             shuffleP1Inputs();
             shuffleP2Inputs();
+
+            gameManager.ChangeState(GameState.ScreenShake);
+        }
+        
+        if(gameManager.gameState != GameState.ScreenShake || (playerCamera.transform.position.y - transform.position.y) > 2) //keeps the camera following the player except for when the platforms shake. might refine this with a coroutine to have the camera catch up w/ the player b/c its kinda clunky rn
+        {
+            playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y +1.63f, -10);
         }
 
 
@@ -148,12 +159,6 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player")){
-            canAttack = true;
-        }
-    }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -180,11 +185,6 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player")){
-            canAttack = false; }
-    }
 
     public void shuffleP1Inputs()
     {
