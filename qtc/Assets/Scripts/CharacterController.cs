@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class CharacterController : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class CharacterController : MonoBehaviour
     Vector2 directionToOtherPlayer;
 
     public Camera playerCamera;
+    public float score;
+    public TextMeshProUGUI scoreText;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +50,8 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            score = Mathf.RoundToInt((transform.position.y + 2.63f)*10);
+            scoreText.text = score.ToString();
 
         if (PlayerNumber == 1)
         {
