@@ -129,26 +129,26 @@ public class CharacterController : MonoBehaviour
     {
         if (Input.GetKey(p2Button1))
         {
-            animator.SetBool("isWalking", true);
+            animator.SetBool("p2isWalking", true);
             sprite.flipX = true;
             rb.AddForce(new Vector2(-speed, 0), ForceMode2D.Impulse);
         }
 
         if (Input.GetKeyUp(p2Button1)) 
         {
-			animator.SetBool("isWalking", false);
+			animator.SetBool("p2isWalking", false);
 		}
 
         if (Input.GetKey(p2Button2))
         {
-            animator.SetBool("isWalking", true);
+            animator.SetBool("p2isWalking", true);
             sprite.flipX = false;
             rb.AddForce(new Vector2(speed, 0), ForceMode2D.Impulse);
         }
 
         if (Input.GetKeyUp(p2Button2)) 
         {
-			animator.SetBool("isWalking", false);
+			animator.SetBool("p2isWalking", false);
 		}
 
         if (Input.GetKeyDown(p2Button3) && canJump);
@@ -160,7 +160,7 @@ public class CharacterController : MonoBehaviour
 
         if (Input.GetKeyDown(p2Button4))
         {
-            animator.SetTrigger("kicked");
+            animator.SetTrigger("p2kicked");
         }
     }
 
