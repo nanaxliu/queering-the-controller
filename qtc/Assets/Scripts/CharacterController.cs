@@ -127,7 +127,7 @@ public class CharacterController : MonoBehaviour
 
     void P2Movement()
     {
-        if (Input.GetKey(p2Button1))
+        if (Input.GetKeyDown(p2Button1))
         {
             animator.SetBool("p2isWalking", true);
             sprite.flipX = true;
@@ -139,7 +139,7 @@ public class CharacterController : MonoBehaviour
 			animator.SetBool("p2isWalking", false);
 		}
 
-        if (Input.GetKey(p2Button2))
+        if (Input.GetKeyDown(p2Button2))
         {
             animator.SetBool("p2isWalking", true);
             sprite.flipX = false;
@@ -151,10 +151,9 @@ public class CharacterController : MonoBehaviour
 			animator.SetBool("p2isWalking", false);
 		}
 
-        if (Input.GetKeyDown(p2Button3) && canJump);
+        if (Input.GetKeyDown(p2Button3) && canJump)
         {
             rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
-
             canJump = false;
         }
 
