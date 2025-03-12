@@ -14,6 +14,7 @@ public class CharacterController : MonoBehaviour
     public float jumpSpeed;
     public float attackForce;
     public Animator animator;
+    public Animator p2animator;
     public SpriteRenderer sprite;
 
     private static KeyCode[] p1inputs = { KeyCode.W , KeyCode.A, KeyCode.S, KeyCode.D};
@@ -28,6 +29,9 @@ public class CharacterController : MonoBehaviour
     public KeyCode p2Button2 = p2inputs.ElementAt(1);
     public KeyCode p2Button3 = p2inputs.ElementAt(2);
     public KeyCode p2Button4 = p2inputs.ElementAt(3);
+
+    public AudioSource jumpSFX;
+    public AudioSource hitSFX;
 
     bool canJump;
 
@@ -116,6 +120,7 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKeyDown(p1Button1) && canJump)
         {
             rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
+            jumpSFX.Play();
             canJump = false;
         }
 
@@ -129,38 +134,38 @@ public class CharacterController : MonoBehaviour
     {
         if (Input.GetKey(p2Button1))
         {
-            animator.SetBool("p2isWalking", true);
+            p2animator.SetBool("p2isWalking", true);
             sprite.flipX = true;
             rb.AddForce(new Vector2(-speed, 0), ForceMode2D.Impulse);
         }
 
         if (Input.GetKeyUp(p2Button1)) 
         {
-			animator.SetBool("p2isWalking", false);
+			p2animator.SetBool("p2isWalking", false);
 		}
 
         if (Input.GetKey(p2Button2))
         {
-            animator.SetBool("p2isWalking", true);
+            p2animator.SetBool("p2isWalking", true);
             sprite.flipX = false;
             rb.AddForce(new Vector2(speed, 0), ForceMode2D.Impulse);
         }
 
         if (Input.GetKeyUp(p2Button2)) 
         {
-			animator.SetBool("p2isWalking", false);
+			p2animator.SetBool("p2isWalking", false);
 		}
 
         if (Input.GetKeyDown(p2Button3) && canJump);
         {
             rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
-
+            jumpSFX.Play();
             canJump = false;
         }
 
         if (Input.GetKeyDown(p2Button4))
         {
-            animator.SetTrigger("p2kicked");
+            p2animator.SetTrigger("p2kicked");
         }
     }
 
@@ -172,6 +177,8 @@ public class CharacterController : MonoBehaviour
 
             if (PlayerNumber == 1 && Input.GetKey(p1Button3))
             {
+                hitSFX.Play();
+                p2animator.SetTrigger("p2hissed");
                 if (directionToOtherPlayer.x <= 0) // checks if they're to the left
                 {
                     other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(attackForce, 0), ForceMode2D.Impulse);
@@ -181,6 +188,8 @@ public class CharacterController : MonoBehaviour
 
             if (PlayerNumber == 2 && Input.GetKey(p2Button4))
             {
+                hitSFX.Play();
+                animator.SetTrigger("hissed");
                 if (directionToOtherPlayer.x <= 0) // checks if they're to the left
                 {
                     other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(attackForce, 0), ForceMode2D.Impulse);
