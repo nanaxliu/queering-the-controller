@@ -214,7 +214,7 @@ public class CharacterController : MonoBehaviour
         p1Button2 = p1inputs.ElementAt(1);
         p1Button3 = p1inputs.ElementAt(2);
         p1Button4 = p1inputs.ElementAt(3);
-
+        Debug.Log("shuffling p1 inputs");
     }
 
     public void shuffleP2Inputs()
@@ -231,6 +231,8 @@ public class CharacterController : MonoBehaviour
         p2Button2 = p2inputs.ElementAt(1);
         p2Button3 = p2inputs.ElementAt(2);
         p2Button4 = p2inputs.ElementAt(3);
+
+        Debug.Log("shuffling p2 inputs");
 
     }
 }
