@@ -175,7 +175,7 @@ public class CharacterController : MonoBehaviour
         {
             directionToOtherPlayer = transform.position - other.transform.position;
 
-            if (PlayerNumber == 1 && Input.GetKeyDown(p1Button3))
+            if (PlayerNumber == 1 && Input.GetKey(p1Button3))
             {
                 hitSFX.Play();
                 p2animator.SetTrigger("p2hissed");
@@ -186,37 +186,7 @@ public class CharacterController : MonoBehaviour
                 else { other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-attackForce, 0), ForceMode2D.Impulse); } // checks if they're to the right
             }
 
-            if (PlayerNumber == 2 && Input.GetKeyDown(p2Button4))
-            {
-                hitSFX.Play();
-                animator.SetTrigger("hissed");
-                if (directionToOtherPlayer.x <= 0) // checks if they're to the left
-                {
-                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(attackForce, 0), ForceMode2D.Impulse);
-                }
-                else { other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-attackForce, 0), ForceMode2D.Impulse); } // checks if they're to the right
-            }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            directionToOtherPlayer = transform.position - other.transform.position;
-
-            if (PlayerNumber == 1 && Input.GetKeyDown(p1Button3))
-            {
-                hitSFX.Play();
-                p2animator.SetTrigger("p2hissed");
-                if (directionToOtherPlayer.x <= 0) // checks if they're to the left
-                {
-                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(attackForce, 0), ForceMode2D.Impulse);
-                }
-                else { other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-attackForce, 0), ForceMode2D.Impulse); } // checks if they're to the right
-            }
-
-            if (PlayerNumber == 2 && Input.GetKeyDown(p2Button4))
+            if (PlayerNumber == 2 && Input.GetKey(p2Button4))
             {
                 hitSFX.Play();
                 animator.SetTrigger("hissed");
