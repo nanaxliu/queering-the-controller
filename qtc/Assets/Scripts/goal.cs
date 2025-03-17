@@ -5,26 +5,46 @@ using UnityEngine.SceneManagement;
 
 public class goal : MonoBehaviour
 {
-    public GameObject rainbow;
-	bool won = false;
-
 	public AudioSource winSound;
+    public CharacterController checkPN;
+    public GameObject menacingP1;
+    public GameObject menacingP2;
 
-    IEnumerator displayEndScreen()
+    public Animator p1Anim;
+    public Animator p2Anim;
+
+    IEnumerator displayEndScreenP1()
     {
-        yield return new WaitForSeconds(1);
-        Debug.Log("end");
-        SceneManager.LoadScene("endScreen");
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("endScreenP1");
+    }
+
+    IEnumerator displayEndScreenP2()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("endScreenP2");
     }
 	
 	void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && won == false)
+        checkPN = other.gameObject.GetComponent<CharacterController>();
+
+        if (other.CompareTag("Player") && checkPN.PlayerNumber == 1)
         {
-            rainbow.gameObject.SetActive(true);
             winSound.Play();
-            StartCoroutine(displayEndScreen());
-            //won = true;
+            p1Anim.SetBool("won", true);
+            p2Anim.SetBool("p2lose", true);
+            menacingP1.gameObject.SetActive(true);
+            StartCoroutine(displayEndScreenP1());
+        }
+
+        if (other.CompareTag("Player") && checkPN.PlayerNumber == 2)
+        {
+            winSound.Play();
+            p1Anim.SetBool("lose", true);
+            p2Anim.SetBool("p2win", true);
+            menacingP2.gameObject.SetActive(true);
+            StartCoroutine(displayEndScreenP2());
         }
     }
 	
