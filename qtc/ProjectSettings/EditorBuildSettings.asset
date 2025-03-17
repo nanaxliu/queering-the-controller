@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/startScreen.unity
+    guid: f8170b8f9bf8aea4fbf1dc0d80259e5c
+  - enabled: 1
     path: Assets/Scenes/catGotYourTongue.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
