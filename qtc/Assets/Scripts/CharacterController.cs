@@ -249,12 +249,12 @@ public class CharacterController : MonoBehaviour
 
     public void shuffleP2Inputs()
     {
-        for (int p = 0; p < p2inputs.Length; p++ )
+        for (int t = 0; t < p2inputs.Length; t++ )
         {
-            KeyCode tmp2 = p2inputs[p];
-            int g = Random.Range(p, p2inputs.Length);
-            p2inputs[p] = p2inputs[g];
-            p2inputs[g] = tmp2;
+            KeyCode tmp = p2inputs[t];
+            int r = Random.Range(t, p2inputs.Length);
+            p2inputs[t] = p2inputs[r];
+            p2inputs[r] = tmp;
         }
 
         p2Button1 = p2inputs.ElementAt(0);
