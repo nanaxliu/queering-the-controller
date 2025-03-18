@@ -5564,7 +5564,7 @@ MonoBehaviour:
   gameManager: {fileID: 1332221008}
   speed: 3
   jumpSpeed: 10
-  attackForce: 1.2
+  attackForce: 1.5
   animator: {fileID: 1380248447}
   p2animator: {fileID: 1725403128}
   sprite: {fileID: 1380248445}
@@ -6904,7 +6904,7 @@ MonoBehaviour:
   gameManager: {fileID: 1332221008}
   speed: 3
   jumpSpeed: 10
-  attackForce: 1.2
+  attackForce: 1.5
   animator: {fileID: 1380248447}
   p2animator: {fileID: 1725403128}
   sprite: {fileID: 1725403124}
