@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/catGotYourTongue.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/endScreenP2.unity
+  - enabled: 0
+    path: Assets/Scenes/endScreen.unity
     guid: 8445751d4671747a4a8cd9e62c283d2a
   - enabled: 1
     path: Assets/Scenes/endScreenP1.unity
-    guid: efbc6f377f7fe42069de363cbf3b42c3
+    guid: 3f0aa0f6856444e8496f9626b1a5ab54
   m_configObjects: {}
