@@ -264,7 +264,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: player 1 wins !
+  m_text: Player 1 Wins!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f38b42edaad224509bf6a981b3d2176a, type: 2}
   m_sharedMaterial: {fileID: -588202607898001098, guid: f38b42edaad224509bf6a981b3d2176a, type: 2}
