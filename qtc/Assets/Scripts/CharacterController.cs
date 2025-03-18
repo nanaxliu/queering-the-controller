@@ -175,7 +175,7 @@ public class CharacterController : MonoBehaviour
         {
             directionToOtherPlayer = transform.position - other.transform.position;
 
-            if (PlayerNumber == 1 && Input.GetKeyDown(p1Button3))
+            if (PlayerNumber == 1 && Input.GetKey(p1Button3))
             {
                 hitSFX.Play();
                 p2animator.SetTrigger("p2hissed");
@@ -186,7 +186,7 @@ public class CharacterController : MonoBehaviour
                 else { other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-attackForce, 0), ForceMode2D.Impulse); } // checks if they're to the right
             }
 
-            if (PlayerNumber == 2 && Input.GetKeyDown(p2Button4))
+            if (PlayerNumber == 2 && Input.GetKey(p2Button4))
             {
                 hitSFX.Play();
                 animator.SetTrigger("hissed");
@@ -249,12 +249,12 @@ public class CharacterController : MonoBehaviour
 
     public void shuffleP2Inputs()
     {
-        for (int t = 0; t < p2inputs.Length; t++ )
+        for (int p = 0; p < p2inputs.Length; p++ )
         {
-            KeyCode tmp2 = p2inputs[t];
-            int r = Random.Range(t, p2inputs.Length);
-            p2inputs[t] = p2inputs[r];
-            p2inputs[r] = tmp2;
+            KeyCode tmp2 = p2inputs[p];
+            int g = Random.Range(p, p2inputs.Length);
+            p2inputs[p] = p2inputs[g];
+            p2inputs[g] = tmp2;
         }
 
         p2Button1 = p2inputs.ElementAt(0);

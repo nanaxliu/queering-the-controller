@@ -5564,7 +5564,7 @@ MonoBehaviour:
   gameManager: {fileID: 1332221008}
   speed: 3
   jumpSpeed: 10
-  attackForce: 1.5
+  attackForce: 0.35
   animator: {fileID: 1380248447}
   p2animator: {fileID: 1725403128}
   sprite: {fileID: 1380248445}
@@ -5992,7 +5992,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 1486005729, guid: d47a252135a184dd78f0362c289cd6cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6904,7 +6904,7 @@ MonoBehaviour:
   gameManager: {fileID: 1332221008}
   speed: 3
   jumpSpeed: 10
-  attackForce: 1.5
+  attackForce: 0.35
   animator: {fileID: 1380248447}
   p2animator: {fileID: 1725403128}
   sprite: {fileID: 1725403124}
@@ -8395,6 +8395,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1725403125}
     m_Modifications:
+    - target: {fileID: 5178185262087138728, guid: fe2ab02f4bf7a46e584a6e52efb42362, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5178185262087138730, guid: fe2ab02f4bf7a46e584a6e52efb42362, type: 3}
       propertyPath: m_RootOrder
       value: 0
