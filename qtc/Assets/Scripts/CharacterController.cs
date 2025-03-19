@@ -79,7 +79,11 @@ public class CharacterController : MonoBehaviour
             shuffleP1Inputs();
             shuffleP2Inputs();
 
-            gameManager.ChangeState(GameState.ScreenShake);
+            if(PlayerNumber == 2)
+            {
+                Debug.Log("player 2 shuffling");
+                Invoke("PingGameManager", .001f);
+            }
         }
         
         if(gameManager.gameState != GameState.ScreenShake || (playerCamera.transform.position.y - transform.position.y) > 2) //keeps the camera following the player except for when the platforms shake. might refine this with a coroutine to have the camera catch up w/ the player b/c its kinda clunky rn
@@ -88,6 +92,11 @@ public class CharacterController : MonoBehaviour
         }
 
 
+    }
+
+    void PingGameManager()
+    {
+        gameManager.ChangeState(GameState.ScreenShake);
     }
 
     void P1Movement()
