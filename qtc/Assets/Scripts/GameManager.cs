@@ -23,10 +23,20 @@ public class GameManager : MonoBehaviour
     public Animator platformAnim;
 
     public TextMeshProUGUI shhText;
+    public TextMeshProUGUI timerText;
+
+    public float timerDeci;
+    public int seconds;
 
     // Start is called before the first frame update
     void Start()
     {
+        timerDeci = 0;
+        seconds = 60;
+
+        //Invoke("SilentTimer", .01f);
+        Invoke("SilentSeconds", 1f);
+
         gameState = GameState.SplitScreen;
         silentMode = false;
         shhText.enabled = false;
@@ -40,6 +50,39 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void SilentTimer()
+    {
+        if (timerDeci < 1)
+        {
+            timerDeci++;
+
+            timerText.text = seconds.ToString() + ":" + timerDeci.ToString();
+        }
+        else
+        {
+            timerDeci = 0;
+
+            timerText.text = seconds.ToString() + ":00";
+        }
+
+        Invoke("SilentTimer", .01f);
+    }
+
+    public void SilentSeconds()
+    {
+        seconds--;
+        timerText.text = seconds.ToString() + ":00";
+
+        if (seconds > 0)
+        {
+            Invoke("SilentSeconds", 1f);
+        }
+        else
+        {
+            timerText.gameObject.SetActive(false);
+        }
+    }
+
     IEnumerator SilentModeAvailable()
     {
 
@@ -47,6 +90,7 @@ public class GameManager : MonoBehaviour
 
         silentMode = true;
         shhText.enabled=true;
+        Debug.Log("silent mode");
 
         yield return new WaitForSeconds(1.5f);
 
