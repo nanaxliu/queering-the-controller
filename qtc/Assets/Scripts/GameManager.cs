@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         silentMode = false;
         shhText.enabled = false;
 
-        Invoke("EnableSilentMode", 60f);
+        StartCoroutine(SilentModeAvailable());
     }
 
     // Update is called once per frame
@@ -40,6 +40,18 @@ public class GameManager : MonoBehaviour
         
     }
 
+    IEnumerator SilentModeAvailable()
+    {
+
+        yield return new WaitForSeconds(60f);
+
+        silentMode = true;
+        shhText.enabled=true;
+
+        yield return new WaitForSeconds(1.5f);
+
+        shhText.enabled = false;
+    }
     void EnableSilentMode()
     {
         silentMode = true;

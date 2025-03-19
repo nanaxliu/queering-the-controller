@@ -2855,6 +2855,8 @@ MonoBehaviour:
   menacingP2: {fileID: 1777752484}
   p1Anim: {fileID: 1380248447}
   p2Anim: {fileID: 1725403128}
+  musicManager: {fileID: 0}
+  endMusic: {fileID: 8300000, guid: 2277e18038a01f84fadb9c984e68e1ef, type: 3}
 --- !u!58 &512763488
 CircleCollider2D:
   m_ObjectHideFlags: 0
