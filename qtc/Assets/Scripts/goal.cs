@@ -13,16 +13,27 @@ public class goal : MonoBehaviour
     public Animator p1Anim;
     public Animator p2Anim;
 
+    public MusicManager musicManager;
+    public AudioClip endMusic;
+
+
+    private void Start()
+    {
+        musicManager = GameObject.FindWithTag("MusicManager").GetComponent<MusicManager>();
+    }
     IEnumerator displayEndScreenP1()
     {
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("endScreenP1");
+        musicManager.ChangeMusic(endMusic);
+
     }
 
     IEnumerator displayEndScreenP2()
     {
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("endScreenP2");
+        musicManager.ChangeMusic(endMusic);
     }
 	
 	void OnTriggerEnter2D(Collider2D other)

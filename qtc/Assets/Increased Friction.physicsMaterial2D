@@ -7,5 +7,5 @@ PhysicsMaterial2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Increased Friction
-  friction: 0.89
+  friction: 1.29
   bounciness: 0
