@@ -6331,6 +6331,7 @@ MonoBehaviour:
   platformAnim: {fileID: 1224468574}
   shhText: {fileID: 73830821}
   timerText: {fileID: 209549053}
+  zeroes: {fileID: 786957544}
   timerDeci: 0
   seconds: 0
 --- !u!4 &1332221009
