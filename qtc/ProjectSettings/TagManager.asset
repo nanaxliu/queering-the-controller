@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - MusicManager
+  - redButton
+  - yellowButton
+  - greenButton
+  - blueButton
   layers:
   - Default
   - TransparentFX
