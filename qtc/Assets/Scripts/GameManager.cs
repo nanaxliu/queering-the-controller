@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI shhText;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI zeroes;
 
     public float timerDeci;
     public int seconds;
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         else
         {
             timerText.gameObject.SetActive(false);
+            zeroes.gameObject.SetActive(false);
         }
     }
 
@@ -100,13 +102,13 @@ public class GameManager : MonoBehaviour
     {
         silentMode = true;
 
-        ChangeState(GameState.SplitScreen);
         Debug.Log("silent mode");
     }
 
     void NoShhText()
     {
         shhText.enabled = false;
+        ChangeState(GameState.SplitScreen);
     }
 
     public void ChangeState(GameState newState)
@@ -121,6 +123,7 @@ public class GameManager : MonoBehaviour
                 shhText.enabled = true;
 
                 timerText.gameObject.SetActive(true);
+                zeroes.gameObject .SetActive(true);
                 seconds = 15;
                 SilentSeconds();
 
