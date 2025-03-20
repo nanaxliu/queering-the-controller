@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         {
             timerDeci = 0;
 
-            timerText.text = seconds.ToString() + ":00";
+            timerText.text = seconds.ToString();
         }
 
         Invoke("SilentTimer", .01f);
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     public void SilentSeconds()
     {
         seconds--;
-        timerText.text = seconds.ToString() + ":00";
+        timerText.text = seconds.ToString();
 
         if (seconds > 0)
         {
