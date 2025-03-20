@@ -17,18 +17,21 @@ public class CharacterController : MonoBehaviour
     public Animator p2animator;
     public SpriteRenderer sprite;
 
-    private static KeyCode[] p1inputs = { KeyCode.W , KeyCode.A, KeyCode.S, KeyCode.D};
-    private static KeyCode[] p2inputs = { KeyCode.LeftArrow , KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow};
-    
-    public KeyCode p1Button1 = p1inputs.ElementAt(0);
-    public KeyCode p1Button2 = p1inputs.ElementAt(1);
-    public KeyCode p1Button3 = p1inputs.ElementAt(2);
-    public KeyCode p1Button4 = p1inputs.ElementAt(3);
+    public static KeyCode[] p1inputs = {KeyCode.W , KeyCode.A, KeyCode.S, KeyCode.D};
+    public static KeyCode[] p2inputs = {KeyCode.LeftArrow , KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow};
 
-    public KeyCode p2Button1 = p2inputs.ElementAt(0);
-    public KeyCode p2Button2 = p2inputs.ElementAt(1);
-    public KeyCode p2Button3 = p2inputs.ElementAt(2);
-    public KeyCode p2Button4 = p2inputs.ElementAt(3);
+    public KeyCode p1ButtonJump = p1inputs.ElementAt(0); //W Red
+    public KeyCode p1ButtonLeft = p1inputs.ElementAt(1); //A Yellow
+    public KeyCode p1ButtonKick = p1inputs.ElementAt(2); //S Blue
+    public KeyCode p1ButtonRight = p1inputs.ElementAt(3); //D Green
+
+    public KeyCode p2ButtonLeft = p2inputs.ElementAt(0); //Left Yellow
+    public KeyCode p2ButtonRight = p2inputs.ElementAt(1); //Right Green
+    public KeyCode p2ButtonJump = p2inputs.ElementAt(2); //Up Red
+    public KeyCode p2ButtonKick = p2inputs.ElementAt(3); //Down Blue
+
+    public TextMeshProUGUI[] p1labels;
+    public TextMeshProUGUI[] p2labels;
 
     public AudioSource jumpSFX;
     public AudioSource hitSFX;
@@ -75,13 +78,16 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && gameManager.silentMode)
         {
             Debug.Log("sound detected");
-
-            shuffleP1Inputs();
-            shuffleP2Inputs();
+            
+            if(PlayerNumber == 1)
+            {
+                shuffleP1Inputs();
+            }
 
             if(PlayerNumber == 2)
             {
                 Debug.Log("player 2 shuffling");
+                shuffleP2Inputs();
                 Invoke("PingGameManager", .001f);
             }
         }
@@ -102,38 +108,38 @@ public class CharacterController : MonoBehaviour
     void P1Movement()
     {
 
-        if (Input.GetKeyDown(p1Button2))
+        if (Input.GetKeyDown(p1ButtonLeft))
         {
             animator.SetBool("isWalking", true);
             sprite.flipX = true;
             rb.AddForce( new Vector2(-speed, 0), ForceMode2D.Impulse);
         }
 
-        if (Input.GetKeyUp(p1Button2)) 
+        if (Input.GetKeyUp(p1ButtonLeft)) 
         {
 			animator.SetBool("isWalking", false);
 		}
 
-        if (Input.GetKeyDown(p1Button4))
+        if (Input.GetKeyDown(p1ButtonRight))
         {
             animator.SetBool("isWalking", true);
             sprite.flipX = false;
             rb.AddForce(new Vector2(speed, 0), ForceMode2D.Impulse);
         }
 
-        if (Input.GetKeyUp(p1Button4)) 
+        if (Input.GetKeyUp(p1ButtonRight)) 
         {
 			animator.SetBool("isWalking", false);
 		}
 
-        if (Input.GetKeyDown(p1Button1) && canJump)
+        if (Input.GetKeyDown(p1ButtonJump) && canJump)
         {
             rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
             jumpSFX.Play();
             canJump = false;
         }
 
-        if (Input.GetKeyDown(p1Button3))
+        if (Input.GetKeyDown(p1ButtonKick))
         {
             animator.SetTrigger("kicked");
         }
@@ -141,38 +147,39 @@ public class CharacterController : MonoBehaviour
 
     void P2Movement()
     {
-        if (Input.GetKeyDown(p2Button1))
+
+        if (Input.GetKeyDown(p2ButtonLeft))
         {
             p2animator.SetBool("p2isWalking", true);
             sprite.flipX = true;
             rb.AddForce(new Vector2(-speed, 0), ForceMode2D.Impulse);
         }
 
-        if (Input.GetKeyUp(p2Button1)) 
+        if (Input.GetKeyUp(p2ButtonLeft)) 
         {
 			p2animator.SetBool("p2isWalking", false);
 		}
 
-        if (Input.GetKeyDown(p2Button2))
+        if (Input.GetKeyDown(p2ButtonRight))
         {
             p2animator.SetBool("p2isWalking", true);
             sprite.flipX = false;
             rb.AddForce(new Vector2(speed, 0), ForceMode2D.Impulse);
         }
 
-        if (Input.GetKeyUp(p2Button2)) 
+        if (Input.GetKeyUp(p2ButtonRight)) 
         {
 			p2animator.SetBool("p2isWalking", false);
 		}
 
-        if (Input.GetKeyDown(p2Button3) && canJump)
+        if (Input.GetKeyDown(p2ButtonJump) && canJump)
         {
             rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
             jumpSFX.Play();
             canJump = false;
         }
 
-        if (Input.GetKeyDown(p2Button4))
+        if (Input.GetKeyDown(p2ButtonKick))
         {
             p2animator.SetTrigger("p2kicked");
         }
@@ -184,7 +191,7 @@ public class CharacterController : MonoBehaviour
         {
             directionToOtherPlayer = transform.position - other.transform.position;
 
-            if (PlayerNumber == 1 && Input.GetKey(p1Button3))
+            if (PlayerNumber == 1 && Input.GetKey(p1ButtonKick))
             {
                 hitSFX.Play();
                 p2animator.SetTrigger("p2hissed");
@@ -195,7 +202,7 @@ public class CharacterController : MonoBehaviour
                 else { other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-attackForce, 0), ForceMode2D.Impulse); } // checks if they're to the right
             }
 
-            if (PlayerNumber == 2 && Input.GetKey(p2Button4))
+            if (PlayerNumber == 2 && Input.GetKey(p2ButtonKick))
             {
                 hitSFX.Play();
                 animator.SetTrigger("hissed");
@@ -214,7 +221,7 @@ public class CharacterController : MonoBehaviour
         {
             directionToOtherPlayer = transform.position - other.transform.position;
 
-            if (PlayerNumber == 1 && Input.GetKeyDown(p1Button3))
+            if (PlayerNumber == 1 && Input.GetKeyDown(p1ButtonKick))
             {
                 hitSFX.Play();
                 p2animator.SetTrigger("p2hissed");
@@ -225,7 +232,7 @@ public class CharacterController : MonoBehaviour
                 else { other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-attackForce, 0), ForceMode2D.Impulse); } // checks if they're to the right
             }
 
-            if (PlayerNumber == 2 && Input.GetKeyDown(p2Button4))
+            if (PlayerNumber == 2 && Input.GetKeyDown(p2ButtonKick))
             {
                 hitSFX.Play();
                 animator.SetTrigger("hissed");
@@ -249,10 +256,16 @@ public class CharacterController : MonoBehaviour
             p1inputs[r] = tmp;
         }
 
-        p1Button1 = p1inputs.ElementAt(0);
-        p1Button2 = p1inputs.ElementAt(1);
-        p1Button3 = p1inputs.ElementAt(2);
-        p1Button4 = p1inputs.ElementAt(3);
+        p1ButtonJump = p1inputs.ElementAt(0);
+        p1ButtonLeft = p1inputs.ElementAt(1);
+        p1ButtonKick = p1inputs.ElementAt(2);
+        p1ButtonRight = p1inputs.ElementAt(3);
+
+        labelp1button(p1ButtonJump, "Jump");
+        labelp1button(p1ButtonLeft, "Left");
+        labelp1button(p1ButtonKick, "Kick");
+        labelp1button(p1ButtonRight, "Right");
+
         Debug.Log("shuffling p1 inputs");
     }
 
@@ -266,12 +279,65 @@ public class CharacterController : MonoBehaviour
             p2inputs[r] = tmp;
         }
 
-        p2Button1 = p2inputs.ElementAt(0);
-        p2Button2 = p2inputs.ElementAt(1);
-        p2Button3 = p2inputs.ElementAt(2);
-        p2Button4 = p2inputs.ElementAt(3);
+        p2ButtonLeft = p2inputs.ElementAt(0);
+        p2ButtonRight = p2inputs.ElementAt(1);
+        p2ButtonJump = p2inputs.ElementAt(2);
+        p2ButtonKick = p2inputs.ElementAt(3);
+
+        labelp2button(p2ButtonJump, "Jump");
+        labelp2button(p2ButtonLeft, "Left");
+        labelp2button(p2ButtonKick, "Kick");
+        labelp2button(p2ButtonRight, "Right");
 
         Debug.Log("shuffling p2 inputs");
 
+    }
+
+    private void labelp1button(KeyCode p1button, string p1control)
+    {
+        if (p1button == KeyCode.W)
+        {
+            p1labels[0].text = p1control;
+            Debug.Log("p1 red is " + p1control);
+        }
+        else if (p1button == KeyCode.A)
+        {
+            p1labels[1].text = p1control;
+            Debug.Log("p1 yellow is " + p1control);
+        }
+        else if (p1button == KeyCode.S)
+        {
+            p1labels[2].text = p1control;
+            Debug.Log("p1 green is " + p1control);
+        }
+        else if (p1button == KeyCode.D)
+        {
+            p1labels[3].text = p1control;
+            Debug.Log("p1 blue is " + p1control);
+        }
+    }
+    
+    private void labelp2button(KeyCode p2button, string p2control)
+    {
+        if (p2button == KeyCode.UpArrow)
+        {
+            p2labels[0].text = p2control;
+            Debug.Log("p2 red is " + p2control);
+        }
+        else if (p2button == KeyCode.LeftArrow)
+        {
+            p2labels[1].text = p2control;
+            Debug.Log("p2 yellow is " + p2control);
+        }
+        else if (p2button == KeyCode.DownArrow)
+        {
+            p2labels[2].text = p2control;
+            Debug.Log("p2 green is " + p2control);
+        }
+        else if (p2button == KeyCode.RightArrow)
+        {
+            p2labels[3].text = p2control;
+            Debug.Log("p2 blue is " + p2control);
+        }
     }
 }
