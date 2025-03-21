@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] yellowButtons;
     public GameObject[] greenButtons;
     public GameObject[] blueButtons;
+
+    public AudioSource shhSFX;
     
 
     // Start is called before the first frame update
@@ -116,6 +118,7 @@ public class GameManager : MonoBehaviour
         silentMode = true;
         shhText.enabled=true;
         shhIcon.gameObject.SetActive(true);
+        shhSFX.Play();
         Debug.Log("silent mode");
 
         yield return new WaitForSeconds(1.5f);
@@ -148,6 +151,7 @@ public class GameManager : MonoBehaviour
                 platformAnim.Play("platform-shake");
                 shhText.enabled = true;
                 shhIcon.gameObject.SetActive(true);
+                shhSFX.Play();
                 buttonflashAnimation();
 
                 timerText.gameObject.SetActive(true);
